@@ -23,7 +23,11 @@ export const UserTile = ({ user, onUpdate }) => {
     onUpdate(updatedUser);
     toggleUpdateForm();
   };
-
+  const handleDelete = () => {
+    DeleteData(subCat._id)
+    
+    console.log('Delete sub-category:', subCat);
+  };
   return (
     <div className="flex flex-col w-full">
       {active === 0 ? (
@@ -59,7 +63,7 @@ export const UserTile = ({ user, onUpdate }) => {
               >
                 <Pencil className="w-3 h-3" />
               </button>
-              <button className="p-2 bg-red-500 text-white rounded hover:bg-red-600">
+              <button onClick={handleDelete} className="p-2 bg-red-500 text-white rounded hover:bg-red-600">
                 <Trash2 className="w-3 h-3" />
               </button>
             </div>

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Edit, Trash2 } from 'lucide-react';
 import VendorSubCategoryUpdateForm from './VendorSubCatUpdateForm';
 
-const SubCatTile = ({ subCat }) => {
+const SubCatTile = ({ subCat, DeleteData }) => {
   const [isEditing, setIsEditing] = useState(false);
 
+
   const handleDelete = () => {
-    // Implement delete functionality here
+    DeleteData(subCat._id)
+    
     console.log('Delete sub-category:', subCat);
   };
 

@@ -2,21 +2,16 @@ import React, { useState } from 'react';
 import useApi from '../../useApi/useApi';
 import { CategoryUpdateForm } from './CategoryUpdateForm';
 
-const VendorCategoryTile = ({ navbar, onUpdate }) => {
+const VendorCategoryTile = ({ navbar, onUpdate, DeleteData }) => {
   const [active, setActive] = useState(0);
   const { deleteData, fetchData } = useApi();
 
-  const deleteCat = async () => {
-    const itemId = navbar._id;
-
-    try {
-      await deleteData('NavBar', itemId);
-      console.log('Deleted category:', itemId);
-      fetchData('NavBar/view'); // Refresh data after deletion
-    } catch (error) {
-      console.error('Error deleting category:', error.message);
-    }
+  const handleDelete = () => {
+    DeleteData(subCat._id)
+    
+    console.log('Delete sub-category:', subCat);
   };
+
 
   const toggleUpdateForm = () => {
     setActive(active === 1 ? 0 : 1);
@@ -51,7 +46,7 @@ const VendorCategoryTile = ({ navbar, onUpdate }) => {
                 </svg>
               </button>
               <button
-                onClick={deleteCat}
+                onClick={handleDelete}
                 className="p-1 rounded-md bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 aria-label="Delete"
               >

@@ -17,8 +17,8 @@ export const MainSection= ({active}) => {
                 return <DashBoard/>
             case 2:
                 return <UserPage/>
-            case 3:
-                return <RoleManagement/>
+            // case 3:
+            //     return <RoleManagement/>
             case 4:
                 return <VendorCategory/>
             case 5:

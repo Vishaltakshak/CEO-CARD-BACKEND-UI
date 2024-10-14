@@ -4,7 +4,7 @@ import { Gauge, UserCog, UsersRound, Store, House, CalendarDays, Shapes, StickyN
 export const AsideList = [
     { id: 1, incons: <Gauge stroke="rgb(183, 182, 182)"  />, title: 'DashBoard' },
     { id: 2, incons: <UsersRound stroke="rgb(183, 182, 182)"  />, title: 'Users' },
-    { id: 3, incons: <UserCog stroke="rgb(183, 182, 182)"  />, title: 'Role Management' },
+    // { id: 3, incons: <UserCog stroke="rgb(183, 182, 182)"  />, title: 'Role Management' },
     { id: 4, incons: <Store stroke="rgb(183, 182, 182)"  />, title: 'Vendor Category' },
     { id: 5, incons: <Store stroke="rgb(183, 182, 182)"  />, title: 'Vendor SubCategory' },
     { id: 6, incons: <House stroke="rgb(183, 182, 182)"  />, title: 'Service Providers' },

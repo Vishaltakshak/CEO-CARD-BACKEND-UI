@@ -20,6 +20,14 @@ const UserManagement = () => {
       console.error("Error fetching users:", err);
     }
   }
+  const DeleteData = async (id) => {
+    try {
+        await deleteData('Nav/hover/delete', id); // Await the delete operation
+        setUsers(prevUsers => prevUsers.filter(user => user._id !== id)); // Filter out the deleted user
+    } catch (err) {
+        console.error("Error deleting user:", err);
+    }
+};
 
   const handleUserUpdate = (updatedUser) => {
     setUsers(prevUsers => prevUsers.map(user => 
@@ -40,6 +48,7 @@ const UserManagement = () => {
             key={user._id} 
             user={user} 
             onUpdate={handleUserUpdate}
+            DeleteData={DeleteData}
           />
         ))
       )}

@@ -6,7 +6,7 @@ import AsideSection from './Components/Aside/Aside'
 import { Header } from './Components/Header/Header'
 
 function App() {
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState(1)
 
   return (
     <div>

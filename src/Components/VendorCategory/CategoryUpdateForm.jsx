@@ -10,6 +10,7 @@ export const CategoryUpdateForm = ({ navbar, setActive }) => {
         CategoryName: '',
         Status: '',
         Description: ''
+
     });
 
     const [fileName, setFileName] = useState('No file chosen');

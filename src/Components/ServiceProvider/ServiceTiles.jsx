@@ -7,7 +7,7 @@ import ServiceTile from './ServiceTile';
 
 
 const ServiceProviderTIles = () => {
-    const { data: loading, error, fetchData,  } = useApi();
+    const { data: loading, error, fetchData, deleteData } = useApi();
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -29,6 +29,14 @@ const ServiceProviderTIles = () => {
       user._id === updatedUser._id ? updatedUser : user
     ));
   }
+  const DeleteData = async (id) => {
+    try {
+        await deleteData('subnav/link/delete', id); // Await the delete operation
+        setUsers(prevUsers => prevUsers.filter(user => user._id !== id)); // Filter out the deleted user
+    } catch (err) {
+        console.error("Error deleting user:", err);
+    }
+};
 
 //   if (loading) return <div>Loading...</div>;
 //   if (error) return <div>Error: {error.message}</div>;
@@ -43,6 +51,7 @@ const ServiceProviderTIles = () => {
             key={user._id} 
             service={user} 
             onUpdate={handleUserUpdate}
+            DeleteData={DeleteData}
           />
         ))
       )}

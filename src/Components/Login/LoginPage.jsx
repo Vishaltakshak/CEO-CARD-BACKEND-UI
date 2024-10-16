@@ -44,7 +44,7 @@ const LoginPage = () => {
 
   const authenticateUser = async (username, password) => {
     // Check if any user matches the provided credentials
-    const user = users.find(user => user.Name === username && user.Password === password &&user.Status==='Active');
+    const user = users.find(user => user.Name === username && user.Password === password &&user.Status==='Active' &&user.UserType==='Admin'||'Manager');
     
     if (user) {
       return { success: true, user }; // Return the matched user

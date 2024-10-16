@@ -12,5 +12,5 @@ export const AsideList = [
     { id: 8, incons: <CalendarDays stroke="rgb(183, 182, 182)"  />, title: 'Booking Management' },
     { id: 9, incons: <Shapes stroke="rgb(183, 182, 182)"  />, title: 'Inventory Management' },
     { id: 10, incons: <StickyNote stroke="rgb(183, 182, 182)"  />, title: 'Content Management' },
-    { id: 11, incons: <Bell stroke="rgb(183, 182, 182)"  />, title: 'Notifications' },
+    // { id: 11, incons: <Bell stroke="rgb(183, 182, 182)"  />, title: 'Notifications' },
 ];

@@ -31,7 +31,8 @@ const LoginPage = () => {
       const response = await authenticateUser(username, password);
       if (response.success) {
        
-        navigate('/after-login'); // Redirect to AfterLogin component
+        navigate('/after-login', { state: { userId: response.user._id } }); 
+       
       } else {
         setError(response.message || 'Login failed. Please try again.');
       }
@@ -44,9 +45,10 @@ const LoginPage = () => {
 
   const authenticateUser = async (username, password) => {
     // Check if any user matches the provided credentials
-    const user = users.find(user => user.Name === username && user.Password === password &&user.Status==='Active' &&user.UserType==='Admin'||'Manager');
+    const user = users.find(user => user.Name === username && user.Password === password &&user.Status==='Active');
     
     if (user) {
+      console.log("Authenticated user:", user); 
       return { success: true, user }; // Return the matched user
     } else {
       return { success: false, message: 'Invalid credentials' };

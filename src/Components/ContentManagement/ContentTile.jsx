@@ -1,8 +1,10 @@
-import React from 'react';
+import {useState} from 'react';
 import { Pencil, Trash2 } from 'lucide-react';
+import ContentUpdateForm from './ContentUpdateForm';
 
 
-const ContentTile = ({ user }) => {
+const ContentTile = ({ user, DeleteData, onUpdate }) => {
+  const [active, setActive] = useState(0);
   const isActive=()=>{
     const status= user.ContentStatus
     if(status==="Available"){
@@ -12,10 +14,20 @@ const ContentTile = ({ user }) => {
       return false;
     }
   }
+  const handleDelete = () => {
+    DeleteData(user._id);
+    console.log('Delete service:', user);
+  };
 
+  const handleUpdate = (updatedService) => {
+    onUpdate(updatedService);
+    setActive(0);
+  };
   return (
     <div className="flex items-center justify-between p-4 border-b border-gray-200">
-      <div className="flex-1 min-w-0">
+      {active===0?(
+        <>
+         <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-gray-900">{user.VendorName}</p>
       </div>
       <div className="flex-1 min-w-0">
@@ -35,6 +47,7 @@ const ContentTile = ({ user }) => {
       
       <div className="flex-shrink-0 ml-2 space-x-2">
         <button
+        onClick={() => setActive(1)}
           
           className="p-1 text-gray-400 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
         >
@@ -42,6 +55,7 @@ const ContentTile = ({ user }) => {
           <span className="sr-only">Edit</span>
         </button>
         <button
+        onClick={handleDelete}
          
           className="p-1 text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 rounded"
         >
@@ -49,6 +63,13 @@ const ContentTile = ({ user }) => {
           <span className="sr-only">Delete</span>
         </button>
       </div>
+
+        </>
+      ):(<ContentUpdateForm active={active} 
+        setActive={setActive} 
+        onUpdate={handleUpdate} 
+        content={user}/>)}
+     
     </div>
   );
 };

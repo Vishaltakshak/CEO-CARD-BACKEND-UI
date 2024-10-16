@@ -1,26 +1,27 @@
-import { useState } from 'react'
-import './App.css'
 
-import { MainSection } from './Components/MainSection'
-import AsideSection from './Components/Aside/Aside'
-import { Header } from './Components/Header/Header'
+import './App.css'
+import LoginBody from './Components/Login/LoginPage'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import AfterLogin from './Pages/AterLogin/AfterLogin';
+
+
 
 function App() {
-  const [active, setActive] = useState(1)
+  
 
   return (
-    <div>
-      <header><Header/></header>
-      <div className='grid grid-cols-10 '>
-      
-    <div className='col-span-2'>    <AsideSection  setActive={setActive} active={active}/></div>
-    <div className='col-span-8'>    <MainSection  active={active} /></div>
-    </div>
-    </div>
     
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginBody />} />
+          <Route path="/after-login" element={<AfterLogin />} />
+        </Routes>
+      </Router>
+    );
 
 
-  )
+  
 }
 
 export default App

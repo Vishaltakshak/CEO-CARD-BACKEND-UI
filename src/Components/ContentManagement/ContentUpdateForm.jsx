@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import useApi from '../../useApi/useApi';
 
-export default function BookingUpdateForm({ active, setActive, handleUpdate, booking, onUpdate }) {
+export default function ContentUpdateForm({ active, setActive, handleUpdate, content, onUpdate }) {
     const { findData, updateData, fetchData } = useApi();
 
     const [vendors, setVendors] = useState([]);
     const [formData, setFormData] = useState({
-        Name: '',
-        BookingType: '',
-        BookingStatus: '', // Ensure this matches your select input name
-        Date: '',
+        VendorName: '',
+        ContentType: '',
+        ContentStatus: '',
+        Title:'',
+        
         Description: ''
     });
 
     useEffect(() => {
         const fetchServiceData = async () => {
             try {
-                const response = await findData(`booking/services/view`, booking._id);
+                const response = await findData(`Content/management/view`, content._id);
                 const vendorManagementResponse = await fetchData('Vendor/vendors');
                 const data = vendorManagementResponse.data.Data;
                 setVendors(data);
@@ -30,7 +31,7 @@ export default function BookingUpdateForm({ active, setActive, handleUpdate, boo
         };
 
         fetchServiceData();
-    }, [booking]);
+    }, [content]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,7 +48,7 @@ export default function BookingUpdateForm({ active, setActive, handleUpdate, boo
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateData('booking/services/update', booking._id, formData);
+            await updateData('Content/management/update', content._id, formData);
             console.log('Form submitted:', formData);
             onUpdate(formData); 
             setActive(0); 
@@ -58,25 +59,26 @@ export default function BookingUpdateForm({ active, setActive, handleUpdate, boo
 
     const handleReset = () => {
         setFormData({
-            Name: '',
-            BookingType: '',
-            BookingStatus: '',
-            Date: '',
+            VendorName: '',
+            contentType: '',
+            ContentStatus: '',
+            Title:'',
+            
             Description: ''
         });
     };
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-            <h1 className="text-3xl font-semibold text-gray-800 mb-6">Enter Booking Details</h1>
+            <h1 className="text-3xl font-semibold text-gray-800 mb-6">Enter content Details</h1>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label htmlFor="Name" className="block text-lg font-medium text-gray-700 mb-2">Name List</label>
+                        <label htmlFor="VendorName" className="block text-lg font-medium text-gray-700 mb-2">Name List</label>
                         <select
-                            id="Name"
-                            name="Name"
-                            value={formData.Name}
+                            id="VendorName"
+                            name="VendorName"
+                            value={formData.VendorName}
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
@@ -89,30 +91,55 @@ export default function BookingUpdateForm({ active, setActive, handleUpdate, boo
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="bookingStatus" className="block text-lg font-medium text-gray-700 mb-2">Booking Status</label>
+                        <label htmlFor="ContentType" className="block text-lg font-medium text-gray-700 mb-2">content Status</label>
                         <select
-                            id="bookingStatus"
-                            name="BookingStatus" // Ensure this matches your state variable
-                            value={formData.BookingStatus}
+                            id="ContentType"
+                            name="ContentType" // Ensure this matches your state variable
+                            value={formData.ContentType}
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
-                            <option value="">Select Booking Status</option>
+                            <option value="">Select Content Type</option>
+                            <option value="Text Content">Text Content</option>
+                            <option value="Image Content">Image Content</option>
+                            <option value="Video Content">Video Content</option>
+                            <option value="Audio Content">Audio Content</option>
+                            <option value="Document Content">Document Content</option>
+                            <option value="HTML Content">HTML Content</option>
+                            <option value="Interactive Content">Interactive Content</option>
+                            <option value="Advertisement Content">Advertisement Content</option>
+                            <option value="Product Content">Product Content</option>
+                        </select>
+                    </div>
+
+                    <div>
+                    <label htmlFor="Title" className="block text-lg font-medium text-gray-700 mb-2">Title</label>
+                    <textarea
+                        id="Title"
+                        name="Title"
+                        value={formData.Title}
+                        onChange={handleChange}
+                        rows={1}
+                        className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    ></textarea>
+                </div>
+
+
+                    <div>
+                        <label htmlFor="ContentStatus" className="block text-lg font-medium text-gray-700 mb-2">content Status</label>
+                        <select
+                            id="ContentStatus"
+                            name="ContentStatus" // Ensure this matches your state variable
+                            value={formData.ContentStatus}
+                            onChange={handleChange}
+                            className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select content Status</option>
                             <option value="Active">Active</option>
                             <option value="Inactive">Inactive</option>
                         </select>
                     </div>
-                    <div>
-                        <label htmlFor="Date" className="block text-lg font-medium text-gray-700 mb-2">Booking Date for</label>
-                        <input
-                            type="date"
-                            id="Date"
-                            name="Date"
-                            value={formData.Date}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                    </div>
+                    
                 </div>
                 <div>
                     <label htmlFor="Description" className="block text-lg font-medium text-gray-700 mb-2">Description</label>
@@ -126,10 +153,10 @@ export default function BookingUpdateForm({ active, setActive, handleUpdate, boo
                     ></textarea>
                 </div>
 
-                {/* Displaying Booking Status with Color Coding */}
-                {/* {formData.BookingStatus && (
-                    <div className={`mt-4 p-2 rounded-md ${formData.BookingStatus === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                        Current Status: {formData.BookingStatus}
+                {/* Displaying content Status with Color Coding */}
+                {/* {formData.ContentStatus && (
+                    <div className={`mt-4 p-2 rounded-md ${formData.ContentStatus === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                        Current Status: {formData.ContentStatus}
                     </div>
                 )} */}
 

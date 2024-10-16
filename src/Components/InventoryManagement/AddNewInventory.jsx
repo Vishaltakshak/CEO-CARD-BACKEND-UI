@@ -1,36 +1,31 @@
 import { useEffect, useState } from 'react';
 import useApi from '../../useApi/useApi';
 
-export default function BookingUpdateForm({ active, setActive, handleUpdate, booking, onUpdate }) {
-    const { findData, updateData, fetchData } = useApi();
+export default function AddNewInventoryForm({ page, showForm }) {
+    const { addData, fetchData } = useApi();
 
     const [vendors, setVendors] = useState([]);
     const [formData, setFormData] = useState({
-        Name: '',
-        BookingType: '',
-        BookingStatus: '', // Ensure this matches your select input name
-        Date: '',
-        Description: ''
+        VendorName: '',
+        Availability: '',
+        Pricing: '',
+        Discount: '',
+        CreationDate: ''
     });
 
     useEffect(() => {
         const fetchServiceData = async () => {
             try {
-                const response = await findData(`booking/services/view`, booking._id);
                 const vendorManagementResponse = await fetchData('Vendor/vendors');
                 const data = vendorManagementResponse.data.Data;
                 setVendors(data);
-                
-                if (response.data.Users) {
-                    setFormData(response.data.Users);
-                }
             } catch (error) {
-                console.error('Error fetching category data:', error);
+                console.error('Error fetching vendor data:', error);
             }
         };
 
         fetchServiceData();
-    }, [booking]);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,46 +36,45 @@ export default function BookingUpdateForm({ active, setActive, handleUpdate, boo
     };
 
     const handleCancel = () => {
-        setActive(0);
+        showForm(0);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateData('booking/services/update', booking._id, formData);
+            await addData('Inventory/management/add', formData);
             console.log('Form submitted:', formData);
-            onUpdate(formData); 
-            setActive(0); 
+            showForm(0); 
         } catch (error) {
-            console.error('Error updating category:', error);
+            console.error('Error adding inventory:', error);
         }
     };
 
     const handleReset = () => {
         setFormData({
-            Name: '',
-            BookingType: '',
-            BookingStatus: '',
-            Date: '',
-            Description: ''
+            VendorName: '',
+            Availability: '',
+            Pricing: '',
+            Discount: '',
+            CreationDate: ''
         });
     };
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-            <h1 className="text-3xl font-semibold text-gray-800 mb-6">Enter Booking Details</h1>
+            <h1 className="text-3xl font-semibold text-gray-800 mb-6">Enter Inventory Details</h1>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label htmlFor="Name" className="block text-lg font-medium text-gray-700 mb-2">Name List</label>
+                        <label htmlFor="VendorName" className="block text-lg font-medium text-gray-700 mb-2">Vendor</label>
                         <select
-                            id="Name"
-                            name="Name"
-                            value={formData.Name}
+                            id="VendorName"
+                            name="VendorName"
+                            value={formData.VendorName}
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
-                            <option value="">Select Names</option>
+                            <option value="">Select Vendor</option>
                             {vendors.map((vendor) => (
                                 <option key={vendor._id} value={vendor.VendorName}>
                                     {vendor.VendorName}
@@ -89,49 +83,54 @@ export default function BookingUpdateForm({ active, setActive, handleUpdate, boo
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="bookingStatus" className="block text-lg font-medium text-gray-700 mb-2">Booking Status</label>
+                        <label htmlFor="Availability" className="block text-lg font-medium text-gray-700 mb-2">Availability</label>
                         <select
-                            id="bookingStatus"
-                            name="BookingStatus" // Ensure this matches your state variable
-                            value={formData.BookingStatus}
+                            id="Availability"
+                            name="Availability"
+                            value={formData.Availability}
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
-                            <option value="">Select Booking Status</option>
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
+                            <option value="">Select Availability</option>
+                            <option value="Available">Available</option>
+                            <option value="Unavailable">Unavailable</option>
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="Date" className="block text-lg font-medium text-gray-700 mb-2">Booking Date for</label>
+                        <label htmlFor="Pricing" className="block text-lg font-medium text-gray-700 mb-2">Pricing</label>
+                        <input
+                            type="number"
+                            id="Pricing"
+                            name="Pricing"
+                            value={formData.Pricing}
+                            onChange={handleChange}
+                            className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="CreationDate" className="block text-lg font-medium text-gray-700 mb-2">Creation Date</label>
                         <input
                             type="date"
-                            id="Date"
-                            name="Date"
-                            value={formData.Date}
+                            id="CreationDate"
+                            name="CreationDate"
+                            value={formData.CreationDate}
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                 </div>
+
                 <div>
-                    <label htmlFor="Description" className="block text-lg font-medium text-gray-700 mb-2">Description</label>
+                    <label htmlFor="Discount" className="block text-lg font-medium text-gray-700 mb-2">Discount</label>
                     <textarea
-                        id="Description"
-                        name="Description"
-                        value={formData.Description}
+                        id="Discount"
+                        name="Discount"
+                        value={formData.Discount}
                         onChange={handleChange}
-                        rows={4}
+                        rows={1}
                         className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     ></textarea>
                 </div>
-
-                {/* Displaying Booking Status with Color Coding */}
-                {/* {formData.BookingStatus && (
-                    <div className={`mt-4 p-2 rounded-md ${formData.BookingStatus === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                        Current Status: {formData.BookingStatus}
-                    </div>
-                )} */}
 
                 <div className="flex space-x-4">
                     <button

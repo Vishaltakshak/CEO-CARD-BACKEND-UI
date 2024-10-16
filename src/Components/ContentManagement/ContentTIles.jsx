@@ -26,12 +26,20 @@ const ContentTiles = () => {
       user._id === updatedUser._id ? updatedUser : user
     ));
   }
+  const DeleteData = async (id) => {
+    try {
+        await deleteData('Content/management/delete', id); // Await the delete operation
+        setUsers(prevUsers => prevUsers.filter(user => user._id !== id)); // Filter out the deleted user
+    } catch (err) {
+        console.error("Error deleting user:", err);
+    }
+};
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <div  className="max-h-[70vh] overflow-y-auto">
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (
@@ -40,6 +48,7 @@ const ContentTiles = () => {
             key={user._id} 
             user={user} 
             onUpdate={handleUserUpdate}
+            DeleteData={DeleteData}
           />
         ))
       )}

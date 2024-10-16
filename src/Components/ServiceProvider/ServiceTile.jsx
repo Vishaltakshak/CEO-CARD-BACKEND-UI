@@ -6,7 +6,7 @@ const ServiceTile = ({onUpdate, service, DeleteData }) => {
   const [active, setActive] = useState(0); // State for managing edit mode
 
   const isActive = () => {
-    return service.ProviderStatus === "Active";
+    return service.BookingStatus === "Active";
   };
 
   const handleDelete = () => {

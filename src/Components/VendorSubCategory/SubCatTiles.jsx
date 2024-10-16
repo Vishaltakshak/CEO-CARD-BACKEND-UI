@@ -41,7 +41,7 @@ const SubCatTiles = () => {
 //   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <div  className="max-h-[70vh] overflow-y-auto">
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (

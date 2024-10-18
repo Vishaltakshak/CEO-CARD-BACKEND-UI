@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { RotateCcw, Pencil, Trash2 } from 'lucide-react';
 import { UpdateForm } from './UpdateForm';
 
-export const UserTile = ({ user, onUpdate }) => {
+export const UserTile = ({ user, onUpdate, DeleteData }) => {
   const isActive=()=>{
     const status= user.Status
-    if(status==="Approved"){
+    if(status==='Active'){
       return true
     }
     else{
@@ -16,7 +16,7 @@ export const UserTile = ({ user, onUpdate }) => {
   const [active, setActive] = useState(0);
 
   const toggleUpdateForm = () => {
-    setActive(active === 1 ? 0 : 1);
+    setActive(active === 0 ? 1 : 0);
   };
 
   const handleUpdate = (updatedUser) => {
@@ -24,14 +24,16 @@ export const UserTile = ({ user, onUpdate }) => {
     toggleUpdateForm();
   };
   const handleDelete = () => {
-    DeleteData(subCat._id)
+    DeleteData(user._id)
     
-    console.log('Delete sub-category:', subCat);
+    console.log('Delete sub-category:', user);
   };
   return (
     <div className="flex flex-col w-full">
       {active === 0 ? (
+        
         <div className="flex items-center px-2 py-4 bg-white border-b w-full">
+          
           <div className="w-1/6">
             <span className="text-gray-800">{user.Name || 'no name'}</span>
           </div>
@@ -49,7 +51,7 @@ export const UserTile = ({ user, onUpdate }) => {
           <div className="flex w-1/4">
             <span className="text-gray-600 mr-2">{user.Role}</span>
             <span className={`px-2 py-1 text-xs font-medium rounded-full ${isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-          {isActive ? 'Approved' : 'UnApproved'}
+          {isActive ? 'Active' : 'Inactive'}
         </span>
           </div>
           <div className="w-1/6 flex items-center gap-2">

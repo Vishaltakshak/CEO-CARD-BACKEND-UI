@@ -32,6 +32,15 @@ const Inv = () => {
 
   return (
     <div>
+      <div className="flex pl-3.5">
+        <div className='w-1/6'><strong>Vendor Name</strong></div>
+        <div className='w-1/6'><strong>Inventory Type</strong></div>
+        <div className='w-1/6'><strong>Availabilty</strong></div>
+        <div className='w-1/6'><strong>Pricing</strong></div>
+        <div className='w-1/6'><strong>Discount</strong></div>
+        <div className='w-1/6'><strong>Created on</strong></div>
+        <div className='w-1/6'><strong>Actions</strong></div>
+      </div>
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (

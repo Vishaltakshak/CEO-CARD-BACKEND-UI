@@ -39,7 +39,16 @@ const ContentTiles = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div  className="max-h-[70vh] overflow-y-auto">
+    <div  className="max-h-[70vh] overflow-y-auto m-1 pl-2">
+      <div className='flex'>
+        <div className='w-1/3'><strong>Title</strong></div>
+        <div className='w-1/3'><strong>Content Type</strong></div>
+        <div className='w-1/3'><strong>Title</strong></div>
+        <div className='w-1/4'><strong>Description</strong></div>
+        <div className='w-1/6'><strong>Status</strong></div>
+        <div className='w-1/6'><strong>Actions</strong></div>
+
+      </div>
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (

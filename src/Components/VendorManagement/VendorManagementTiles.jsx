@@ -33,6 +33,16 @@ const VendorManagementTiles = () => {
 
   return (
     <div  className="max-h-[70vh] overflow-y-auto">
+      <div className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="flex items-center text-left  font-bold ">
+        <div className="flex-1 p-3 ">Category Name</div>
+        
+        <div className="flex-1 p-3 ">Details</div>
+        
+        <div className="w-24 p-3">Actions</div>
+      </div>
+    </div>
+    
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (

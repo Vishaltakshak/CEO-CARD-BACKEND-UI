@@ -46,6 +46,16 @@ const ServiceProviderTIles = () => {
 
   return (
     <div  className="max-h-[70vh] overflow-y-auto">
+      <div className="flex pl-2.5">
+        <div className='w-1/6'><strong>Provider Name</strong></div>
+        <div className='w-1/6'><strong>Category</strong></div>
+        <div className='w-1/6'><strong>Sub Category</strong></div>
+        <div className='w-1/6'><strong>Banner</strong></div>
+        <div className='w-1/6'><strong>Website</strong></div>
+        <div className='w-1/6'><strong>Status</strong></div>
+        <div className='w-1/6'><strong>Actions</strong></div>
+
+      </div>
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (

@@ -42,6 +42,16 @@ const SubCatTiles = () => {
 
   return (
     <div  className="max-h-[70vh] overflow-y-auto">
+      <div className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="flex items-center text-left  font-semibold text-gray-700">
+        <div className=" w-1/6 flex-1 p-3">Sub Category Name</div>
+        <div className=" p-3 w-11/12 mr-5">Description</div>
+        <div className="w-24 pl-5">Status</div>
+        <div className="w-32 pl-2">Main Category</div>
+        <div className="w-28 p-2">Created On</div>
+        <div className="w-24 p-3">Actions</div>
+      </div>
+    </div>
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (

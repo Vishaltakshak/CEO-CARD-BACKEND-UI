@@ -20,7 +20,8 @@ const SubCatTile = ({ subCat, DeleteData }) => {
       ) : (
         <div className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
           <div className="flex items-center space-x-4">
-            <span className="text-lg font-semibold text-gray-800">{subCat.Description}</span>
+          <span className="text-sm text-gray-600">{subCat.SubCategoryName}</span>
+            <span className="w-10/12 text-lg font-semibold text-gray-800">{subCat.Description}</span>
             <span className={`px-2 py-1 text-xs font-medium rounded-full ${isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
               {isActive ? 'Active':'Inactive'}</span>
           </div>

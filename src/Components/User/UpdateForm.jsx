@@ -85,6 +85,15 @@ export const UpdateForm = ({ userId, setActive, active }) => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]; // Get the uploaded file
+    if (file) {
+      setFormData(prevState => ({ ...prevState, UserImage: file }));
+      setFileName(file.name); // Update the filename displayed
+    }
+  };
+  
+
   const handleReset = () => {
     setFormData({
       Name: '',

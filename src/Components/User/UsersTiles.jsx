@@ -40,6 +40,15 @@ const UserManagement = () => {
 
   return (
     <div className="max-h-[70vh] overflow-y-auto">
+      <div className='flex pl-1.5'>
+            <div className='w-1/4'> <strong> Name</strong></div>
+            <div className='w-1/4'> <strong> Mail</strong></div>
+            <div className='w-1/4'> <strong> MobileNo</strong></div>
+            <div className='w-1/6'> <strong> Profile</strong></div>
+            <div className='w-1/12'> <strong> Role</strong></div>
+            <div className='w-1/6'> <strong> Status</strong></div>
+            <div className='w-1/6'> <strong> Action</strong></div>
+          </div>
       {users.length === 0 ? (
         <div>No users found</div>
       ) : (

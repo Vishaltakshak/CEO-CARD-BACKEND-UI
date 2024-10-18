@@ -59,11 +59,7 @@ export const UpdateForm = ({ userId, setActive, active }) => {
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData(prevState => ({ ...prevState, UserImage: file }));
-    setFileName(file ? file.name : 'No file chosen');
-  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -4,6 +4,7 @@ import VendorSubCategoryUpdateForm from './VendorSubCatUpdateForm';
 
 const SubCatTile = ({ subCat, DeleteData }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const isActive = subCat.Status==='Active'
 
 
   const handleDelete = () => {
@@ -20,7 +21,8 @@ const SubCatTile = ({ subCat, DeleteData }) => {
         <div className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
           <div className="flex items-center space-x-4">
             <span className="text-lg font-semibold text-gray-800">{subCat.Description}</span>
-            <span className="px-2 py-1 text-sm font-medium text-white bg-green-500 rounded-full">{subCat.Status}</span>
+            <span className={`px-2 py-1 text-xs font-medium rounded-full ${isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+              {isActive ? 'Active':'Inactive'}</span>
           </div>
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600">{subCat.MainCategory}</span>

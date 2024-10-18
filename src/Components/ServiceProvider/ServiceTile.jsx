@@ -6,7 +6,7 @@ const ServiceTile = ({onUpdate, service, DeleteData }) => {
   const [active, setActive] = useState(0); // State for managing edit mode
 
   const isActive = () => {
-    return service.BookingStatus === "Active";
+    return service.ProviderStatus === "Active";
   };
 
   const handleDelete = () => {
@@ -45,7 +45,7 @@ const ServiceTile = ({onUpdate, service, DeleteData }) => {
             </a>
             <span className="px-2 py-1 text-sm font-medium text-white bg-green-100 rounded-full whitespace-nowrap">
               <div className="flex-shrink-0 mx-2">
-                <span className={`px-2 py-1 text-xs font-medium rounded-full ${isActive() ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+              <span className={`px-2 py-1 text-xs font-medium rounded-full ${isActive() ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                   {isActive() ? 'Active' : 'Inactive'}
                 </span>
               </div>

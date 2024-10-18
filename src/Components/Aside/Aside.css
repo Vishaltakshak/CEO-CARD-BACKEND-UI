@@ -2,8 +2,9 @@
     /* width: 40vh; */
     background-color: #142133;
     color: rgb(183, 182, 182);
-    height: auto;
+    height: 100vh;
     padding: 1%;
+    overflow: hidden;
   
     
   }
@@ -14,6 +15,6 @@
     list-style: none;
     padding: 5px;
     font-size: 0.9rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.9rem;
     cursor: pointer;
   }

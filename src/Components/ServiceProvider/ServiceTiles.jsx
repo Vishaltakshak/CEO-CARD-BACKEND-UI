@@ -10,6 +10,7 @@ const ServiceProviderTIles = () => {
     const { data: loading, error, fetchData, deleteData } = useApi();
   const [users, setUsers] = useState([]);
 
+
   useEffect(() => {
     getSubCat();
   }, []);
@@ -17,6 +18,8 @@ const ServiceProviderTIles = () => {
   const getSubCat = async () => {
     try {
       const response = await fetchData('subnav/link/view');
+      
+
       setUsers(response.data.Data || []);
       console.log('service',response)
     } catch (err) {
@@ -52,6 +55,7 @@ const ServiceProviderTIles = () => {
             service={user} 
             onUpdate={handleUserUpdate}
             DeleteData={DeleteData}
+            
           />
         ))
       )}

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 import useApi from '../../useApi/useApi';
 import AfterLogin from '../../Pages/AterLogin/AfterLogin';
@@ -13,6 +14,7 @@ const LoginPage = () => {
   const { fetchData } = useApi();
   const navigate = useNavigate(); // Initialize navigate
 
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -22,6 +24,8 @@ const LoginPage = () => {
     
     setUsers(userData.data.Users);
   };
+
+ 
 
   const handleLogin = async (e) => {
     e.preventDefault();

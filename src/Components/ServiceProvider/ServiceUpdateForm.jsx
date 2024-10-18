@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import useApi from '../../useApi/useApi';
 
-export default function ServiceUpdateForm({ active, setActive, handleUpdate, navbar, onUpdate }) {
-  const { findData, updateData,addData } = useApi();
+export default function ServiceUpdateForm({ active, setActive, handleUpdate, navbar, onUpdate, services }) {
+  const { findData, updateData,fetchData } = useApi();
+  const [servie, setService]=useState([])
   const [formData, setFormData] = useState({
     ProviderName: '',
     ContactMail: '',
@@ -37,30 +38,6 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
 };
 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const formPayload = new FormData();
-    
-  //   Object.keys(formData).forEach(key => {
-  //     if (formData[key] !== null) {
-  //       formPayload.append(key, formData[key]);
-  //     }
-  //   });
-
-  //   try {
-  //     if (navbar._id) {
-  //       console.log(navbar._id)
-  //       const updatedUser = await updateData('subnav/link/update', navbar._id, formPayload);
-  //       console.log('User data updated successfully', updatedUser);
-  //     } else {
-  //       await addData('subnav/link/add', formPayload);
-  //       console.log('New user added successfully');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting data:', error);
-  //   }
-  // };
 
   const handleReset=()=>{
     setFormData({ ProviderName: '',
@@ -89,9 +66,17 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
     const fetchServiceData = async () => {
       try {
         const response = await findData(`subnav/link/view`, navbar._id);
+
         if (response.data.Users) {
           setFormData(response.data.Users);
         }
+
+
+        const ServiceCat = await fetchData('NavBar/view');
+      const services= ServiceCat.data.Data;
+      if(services){
+        setService(services.map(item=>item.CategoryName))
+      }
       } catch (error) {
         console.error('Error fetching category data:', error);
       }
@@ -115,6 +100,7 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
     console.log(active)
 
   }
+ 
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
@@ -136,8 +122,11 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                   >
-                    <option>{value}</option>
-                    {/* Add more options dynamically as needed */}
+                     {servie.map((item, index) => (
+                      <option key={index} value={item}>{item}</option>  
+                    ))}
+                    
+                    
                   </select>
                 ) : key === 'ContentDescription' || key === 'CardDescription' ? (
                   <textarea

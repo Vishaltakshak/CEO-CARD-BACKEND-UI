@@ -18,6 +18,8 @@ export const UpdateForm = ({ userId, setActive, active }) => {
     Status: 'Active',
     UserType: 'Regular User',
     UserImage: null,
+    Currency:'',
+    Language:''
   });
 
   const [fileName, setFileName] = useState('No file chosen');
@@ -42,6 +44,9 @@ export const UpdateForm = ({ userId, setActive, active }) => {
             ProfessionalTitle: userData.ProfessionalTitle || '',
             Status: userData.Status || 'Active',
             UserType: userData.UserType || 'Regular User',
+            Currency:userData.Currency,
+            Language:userData.Language,
+
           }));
         }
       } catch (error) {
@@ -137,7 +142,9 @@ export const UpdateForm = ({ userId, setActive, active }) => {
               ['MobileNumber', 'Mobile Number'],
               ['LinkedinProfile', 'LinkedIn Profile (URL)'],
               ['CompanyName', 'Company Name'],
-              ['ProfessionalTitle', 'Professional Title']
+              ['ProfessionalTitle', 'Professional Title'],
+              ['Currency','Currency'],
+              ['Language','Language']
             ].map(([key, label]) => (
               <div key={key}>
                 <label htmlFor={key} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>

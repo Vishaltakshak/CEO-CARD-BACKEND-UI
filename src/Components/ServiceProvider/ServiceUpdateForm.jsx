@@ -6,6 +6,7 @@ import useApi from '../../useApi/useApi';
 export default function ServiceUpdateForm({ active, setActive, handleUpdate, navbar, onUpdate, services }) {
   const { findData, updateData,fetchData } = useApi();
   const [servie, setService]=useState([])
+  const [subCat, setSubCat]= useState([]);
   const [formData, setFormData] = useState({
     ProviderName: '',
     ContactMail: '',
@@ -72,7 +73,7 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
         }
 
 
-        const ServiceCat = await fetchData('NavBar/view');
+      const ServiceCat = await fetchData('NavBar/view');
       const services= ServiceCat.data.Data;
       if(services){
         setService(services.map(item=>item.CategoryName))
@@ -80,6 +81,17 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
       } catch (error) {
         console.error('Error fetching category data:', error);
       }
+
+
+
+      const fetchsubCat= await fetchData("Nav/hover/view");
+      const subcat = fetchsubCat.data.Data;;
+      console.log("subcat", subcat)
+      if(subcat){
+        const subCategoryNames = subcat.map(e => e.SubCategoryName);
+        setSubCat(subCategoryNames);
+      }
+     
     };
 
     fetchServiceData();
@@ -100,21 +112,20 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
     console.log(active)
 
   }
- 
-
+  
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">Enter Vendor Details</h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {Object.entries(formData).map(([key, value]) => {
-            if (['BannerIMG', 'ServiceIMG'].includes(key)) return null;
+            if (['BannerIMG', 'ServiceIMG', 'SubCategory'].includes(key)) return null;
             return (
               <div key={key}>
                 <label htmlFor={key} className="block text-sm font-medium text-gray-700 mb-1">
                   {key.replace(/([A-Z])/g, ' $1').trim()}
                 </label>
-                {key === 'ServiceCatergory' || key === 'SubCategory' || key === 'Status' ? (
+                {key === 'ServiceCatergory'  || key === 'Status' ? (
                   <select
                     id={key}
                     name={key}
@@ -151,6 +162,21 @@ export default function ServiceUpdateForm({ active, setActive, handleUpdate, nav
             );
           })}
         </div>
+       <div>
+  <label htmlFor="SubCategory" className="block text-sm font-medium text-gray-700 mb-1">Select SubCategories</label>
+  <select
+    name="SubCategory"
+    id="SubCategory"
+    value={formData.SubCategory}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+  >
+    <option value="">Select a subcategory</option>
+    {subCat.map((item, index) => (
+      <option key={index} value={item}>{item}</option>
+    ))}
+  </select>
+</div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Banner Images/Videos</label>

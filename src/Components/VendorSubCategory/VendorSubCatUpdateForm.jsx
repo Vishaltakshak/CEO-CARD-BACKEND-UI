@@ -5,6 +5,7 @@ export default function VendorSubCategoryUpdateForm({ onCancel, subCat }) {
   const [maincat, setMainCat] = useState([]); // Stores main categories
   const { findData, updateData, fetchData } = useApi();
   const [loading, setLoading] = useState(true);
+  // const [subCat, setSubCat]=useState([])
   const [formData, setFormData] = useState({
     SubCategoryName: '',
     MainCategory: 'BUSINESS',
@@ -35,6 +36,13 @@ export default function VendorSubCategoryUpdateForm({ onCancel, subCat }) {
         setLoading(false);
       }
     };
+
+    // const fetchSubCat=async()=>{
+    //   const response = await fetchData('subnav/link/view');
+    //   const data = response.data.Data;
+
+
+    // }
 
     const fetchMainCat = async () => {
       try {

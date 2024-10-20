@@ -29,6 +29,8 @@ const SubCatTiles = () => {
     } catch (err) {
         console.error("Error deleting user:", err);
     }
+  
+  
 };
 
   const handleUserUpdate = (updatedUser) => {
